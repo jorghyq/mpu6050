@@ -45,9 +45,12 @@ void MPU6050::outputData()
 
 void MPU6050::calibration(int sampleNumber)
 {
+    uint16_t a_xSum = 0;
+    uint16_t g_xSum = 0; 
     for(int i = 0; i < sampleNumber; i++)
     {
         getdata();
+        a_
     }
 }
 

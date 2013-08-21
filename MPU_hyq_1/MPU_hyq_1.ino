@@ -15,26 +15,10 @@ double compAngleX, compAngleY; // Calculate the angle using a complementary filt
 double kalAngleX, kalAngleY, kalAngleZ; // Calculate the angle using a Kalman filter
 
 uint32_t timer;
-//uint8_t I2c.i2cData[14]; // Buffer for I2C data
 
 void setup() {  
   Serial.begin(115200);
-  //I2c.i2cInitialize();
   myMPU.initialize();
-  //Wire.begin();
-//  I2c.i2cData[0] = 7; // Set the sample rate to 1000Hz - 8kHz/(7+1) = 1000Hz
-//  I2c.i2cData[1] = 0x00; // Disable FSYNC and set 260 Hz Acc filtering, 256 Hz Gyro filtering, 8 KHz sampling
-//  I2c.i2cData[2] = 0x00; // Set Gyro Full Scale Range to ±250deg/s
-//  I2c.i2cData[3] = 0x00; // Set Accelerometer Full Scale Range to ±2g
-//  while(I2c.i2cWrite(0x19,I2c.i2cData,4,false)); // Write to all four registers at once
-//  while(I2c.i2cWrite(0x6B,0x01,true)); // PLL with X axis gyroscope reference and disable sleep mode 
-//  
-//  while(I2c.i2cRead(0x75,I2c.i2cData,1));
-//  if(I2c.i2cData[0] != 0x68) { // Read "WHO_AM_I" register
-//    Serial.print(F("Error reading sensor"));
-//    while(1);
-//  }
-  
   delay(100); // Wait for sensor to stabilize
   
   /* Set kalman and gyro starting angle */
