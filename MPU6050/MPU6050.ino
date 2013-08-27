@@ -98,7 +98,10 @@ void loop() {
   
   compAngleX = (0.93*(compAngleX+(gyroXrate*(double)(micros()-timer)/1000000)))+(0.07*accXangle); // Calculate the angle using a Complimentary filter
   compAngleY = (0.93*(compAngleY+(gyroYrate*(double)(micros()-timer)/1000000)))+(0.07*accYangle);
-  
+  double test = double(micros()-timer);
+  Serial.println(test);
+  test = test/1000000;
+  Serial.println(test);
   kalAngleX = kalmanX.getAngle(accXangle, gyroXrate, (double)(micros()-timer)/1000000); // Calculate the angle using a Kalman filter
   kalAngleY = kalmanY.getAngle(accYangle, gyroYrate, (double)(micros()-timer)/1000000);
   timer = micros();
@@ -115,17 +118,17 @@ void loop() {
   Serial.print(gyroY); Serial.print("\t");
   Serial.print(gyroZ);Serial.print("\t");
   */
-  Serial.print(accXangle);Serial.print("\t");
-  Serial.print(gyroXangle);Serial.print("\t");
-  Serial.print(compAngleX);Serial.print("\t");
-  Serial.print(kalAngleX);Serial.print("\t");
+  //Serial.print(accXangle);Serial.print("\t");
+  //Serial.print(gyroXangle);Serial.print("\t");
+  //Serial.print(compAngleX);Serial.print("\t");
+  //Serial.print(kalAngleX);Serial.print("\t");
   
-  Serial.print("\t");
+  //Serial.print("\t");
   
-  Serial.print(accYangle);Serial.print("\t");
-  Serial.print(gyroYangle);Serial.print("\t");
-  Serial.print(compAngleY); Serial.print("\t");
-  Serial.print(kalAngleY);Serial.print("\t");
+  //Serial.print(accYangle);Serial.print("\t");
+  //Serial.print(gyroYangle);Serial.print("\t");
+  //Serial.print(compAngleY); Serial.print("\t");
+  //Serial.print(kalAngleY);Serial.print("\t");
   
   //Serial.print(temp);Serial.print("\t");
    
