@@ -10,6 +10,9 @@ double angleX = 0;
 double angleY = 0;
 int setPos = 0;
 int a=0;
+int b=0;
+double dif;
+int sign;
 /* IMU Data */
 double p; // p constant for PID
 double i; // i constant for PID
@@ -44,21 +47,40 @@ void setup() {
 }
 
 void loop() {
-  /* Update all the values */
-  a = 20;  
+  /* Update all the values */ 
   myMPU.readData();
   angleX = myMPU.getXangle();
-  if(angleX > 180)
+  dif = angleX - 180;
+  Serial.println(dif);
+  if(dif > 7) sign = 1;
+  else if(dif < -7) sign = 2;
+  else sign = 3;
+  switch(sign)
   {
-    servoX.write(setPos+a);
-    //a = a + 5;
+    case 1:
+      a = a + 1;
+      //b = 0;
+      servoX.write(setPos + a);
+      Serial.print("increase to ");
+      Serial.println(setPos + a);
+      delay(15);
+      break;
+    case 2:
+      a = a - 1;
+      //a = 0;
+      servoX.write(setPos + a);
+      Serial.print("decrease to ");
+      Serial.println(setPos - a);
+      delay(15);
+      break;
+    case 3:
+      //a = 0;
+      //b = 0;
+      Serial.println("it is fine.");
+      //servoX.write(setPos);
+      delay(15);
   }
-  //a = 5;
-  else
-  {
-    servoX.write(setPos-a);
-    //a = a + 5;
-  }
+  
   
   /* Print Data */
   //myMPU.getFilteredData();
