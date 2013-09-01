@@ -1,6 +1,6 @@
 #include <Wire.h>
 #include <Servo.h>
-#include "MPU6050.h" // Source: https://github.com/TKJElectronics/KalmanFilter
+#include "MPU6050.h"
 
 //I2C i2c;
 MPU6050 myMPU;
@@ -30,18 +30,18 @@ void setup() {
      servoX.write(pos);
      myMPU.readData();
      angleX = myMPU.getXangle();
-     Serial.print("MPU angle: ");
-     Serial.println(angleX); 
+     //Serial.print("MPU angle: ");
+     //Serial.println(angleX); 
      //setPos = pos;
-     Serial.print("Servo position: ");
-     Serial.println(pos);
+     //Serial.print("Servo position: ");
+     //Serial.println(pos);
      delay(15);
      pos = pos + 1;
        
   }
   setPos = pos;
-  Serial.print("set position: ");
-  Serial.println(setPos);
+  //Serial.print("set position: ");
+  //Serial.println(setPos);
   servoX.write(setPos);
   //timer = micros();
 }
@@ -51,7 +51,11 @@ void loop() {
   myMPU.readData();
   angleX = myMPU.getXangle();
   dif = angleX - 180;
-  Serial.println(dif);
+  Serial.print(angleX);
+  Serial.print("\t");
+  Serial.print(setPos + a);
+  Serial.print("\t");
+  Serial.print("\r\n");
   if(dif > 7) sign = 1;
   else if(dif < -7) sign = 2;
   else sign = 3;
@@ -61,22 +65,22 @@ void loop() {
       a = a + 1;
       //b = 0;
       servoX.write(setPos + a);
-      Serial.print("increase to ");
-      Serial.println(setPos + a);
+      //Serial.print("increase to ");
+      //Serial.println(setPos + a);
       delay(15);
       break;
     case 2:
       a = a - 1;
       //a = 0;
       servoX.write(setPos + a);
-      Serial.print("decrease to ");
-      Serial.println(setPos - a);
+      //Serial.print("decrease to ");
+      //Serial.println(setPos - a);
       delay(15);
       break;
     case 3:
       //a = 0;
       //b = 0;
-      Serial.println("it is fine.");
+      //Serial.println("it is fine.");
       //servoX.write(setPos);
       delay(15);
   }
